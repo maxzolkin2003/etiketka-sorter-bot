@@ -148,14 +148,13 @@ async def handle_files(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['pdf_file'] = None
 
 async def main():
-    from telegram.ext import ApplicationBuilder, MessageHandler, filters
-
     app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(MessageHandler(filters.Document.ALL, handle_files))
-
     print("Бот запущен...")
     await app.run_polling()
 
 if __name__ == '__main__':
     import asyncio
-    asyncio.run(main())
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
+
