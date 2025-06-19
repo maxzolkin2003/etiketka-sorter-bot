@@ -4,6 +4,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTyp
 import pandas as pd
 import fitz  # PyMuPDF
 import re
+import asyncio
 
 TOKEN = os.getenv('TOKEN')
 if not TOKEN:
@@ -154,7 +155,7 @@ async def main():
     await app.run_polling()
 
 if __name__ == '__main__':
-    import asyncio
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     loop.run_until_complete(main())
 
